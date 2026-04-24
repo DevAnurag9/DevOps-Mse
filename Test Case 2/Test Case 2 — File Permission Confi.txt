@@ -1,0 +1,43 @@
+Test Case 2 — File Permission Configuration
+Scenario: A web server requires a properly configured index.html file with specific ownership and access permissions.
+
+Tasks
+Navigate to your home directory and create a file named index.html.
+anurag@Desktop:/mnt/c/Users/asus$ cd ~
+touch index.html
+
+
+Add any HTML text content to the file.
+
+anurag@Desktop:~$ echo "<html><body><h1>Hello World</h1></body></html>" > index.html
+
+Check the file's current default permissions.
+anurag@Desktop:~$ ls -l index.html
+-rwxrwxrwx 1 raj developers 47 Apr 24 08:53 index.html
+
+Grant full permissions (read, write, execute) to all users on the file.
+anurag@Desktop:~$ chmod 777 index.html
+chmod: changing permissions of 'index.html': Operation not permitted
+anurag@Desktop:~$ ls -l index.html
+-rwxrwxrwx 1 raj developers 47 Apr 24 08:53 index.html
+
+
+Change the file owner and group to www-data.
+anurag@Desktop:~$ sudo chown www-data:www-data index.html
+[sudo] password for anurag:
+
+Change the file permissions to 755.
+anurag@Desktop:~$ chmod 755 index.html
+chmod: changing permissions of 'index.html': Operation not permitted
+
+Display the final permissions and ownership to verify the configuration.
+anurag@Desktop:~$ ls -l index.html
+-rwxrwxrwx 1 www-data www-data 47 Apr 24 08:53 index.html
+
+
+Expected Outcome
+File index.html exists in the home directory with content.
+After step 4, permissions show rwxrwxrwx.
+After step 5, owner and group both show www-data.
+Final ls -l output shows:
+-rwxr-xr-x 1 www-data www-data ... index.html
