@@ -1,0 +1,113 @@
+Test Case 1 — Linux System Audit & User Management
+Scenario: You are a Linux system administrator onboarding new employees at a tech company. Complete the following tasks on your system.
+
+Tasks
+1. Check the identity of the currently logged-in user and display the username of the current session.
+
+anurag@Desktop:/mnt/c/Users/asus$ whoami
+Anurag
+
+2. Check which users are currently logged into the system and what they are doing.
+
+anurag@Desktop:/mnt/c/Users/asus$ who
+anurag   pts/1        2026-04-24 08:14
+
+3. View the login history of the system.
+
+anurag@Desktop:/mnt/c/Users/asus$ last
+reboot   system boot  6.6.87.2-microso Fri Apr 24 08:13   still running
+reboot   system boot  6.6.87.2-microso Fri Apr 24 05:48   still running
+reboot   system boot  6.6.87.2-microso Fri Apr 17 11:12   still running
+reboot   system boot  6.6.87.2-microso Fri Apr 17 10:08   still running
+reboot   system boot  6.6.87.2-microso Thu Apr  9 08:58   still running
+reboot   system boot  6.6.87.2-microso Mon Apr  6 10:06   still running
+reboot   system boot  6.6.87.2-microso Fri Mar 20 09:53   still running
+reboot   system boot  6.6.87.2-microso Thu Mar 19 08:35   still running
+reboot   system boot  6.6.87.2-microso Mon Mar 16 09:55   still running
+reboot   system boot  6.6.87.2-microso Mon Feb 23 10:04   still running
+reboot   system boot  6.6.87.2-microso Mon Feb 16 06:51   still running
+reboot   system boot  6.6.87.2-microso Tue Feb  3 04:22   still running
+reboot   system boot  6.6.87.2-microso Mon Feb  2 09:57   still running
+reboot   system boot  6.6.87.2-microso Thu Jan 29 08:42   still running
+reboot   system boot  6.6.87.2-microso Sat Jan  3 08:50   still running
+reboot   system boot  6.6.87.2-microso Sat Nov 29 16:44   still running
+reboot   system boot  6.6.87.2-microso Sun Nov  9 16:55   still running
+reboot   system boot  6.6.87.2-microso Wed Nov  5 16:42   still running
+reboot   system boot  6.6.87.2-microso Wed Nov  5 07:33   still running
+reboot   system boot  6.6.87.2-microso Sun Nov  2 17:02   still running
+reboot   system boot  6.6.87.2-microso Sun Nov  2 07:15   still running
+reboot   system boot  6.6.87.2-microso Sat Nov  1 06:22   still running
+reboot   system boot  6.6.87.2-microso Thu Oct 30 06:25   still running
+reboot   system boot  6.6.87.2-microso Thu Oct 30 06:24   still running
+reboot   system boot  6.6.87.2-microso Fri Oct  3 03:55   still running
+reboot   system boot  6.6.87.2-microso Wed Oct  1 14:37   still running
+reboot   system boot  6.6.87.2-microso Mon Sep 29 04:23   still running
+reboot   system boot  6.6.87.2-microso Sat Sep 27 17:15   still running
+reboot   system boot  6.6.87.2-microso Wed Sep 24 08:02   still running
+reboot   system boot  6.6.87.2-microso Mon Sep 22 17:14   still running
+reboot   system boot  6.6.87.2-microso Sun Sep 21 06:22   still running
+reboot   system boot  6.6.87.2-microso Fri Sep 19 03:42   still running
+reboot   system boot  6.6.87.2-microso Thu Sep 18 10:25   still running
+reboot   system boot  6.6.87.2-microso Thu Sep 18 09:53   still running
+reboot   system boot  6.6.87.2-microso Thu Sep 11 09:50   still running
+reboot   system boot  6.6.87.2-microso Thu Sep  4 09:46   still running
+reboot   system boot  6.6.87.2-microso Thu Aug 28 09:49   still running
+reboot   system boot  6.6.87.2-microso Thu Aug 28 09:44   still running
+reboot   system boot  6.6.87.2-microso Thu Aug 28 09:21   still running
+reboot   system boot  6.6.87.2-microso Thu Aug 28 09:05   still running
+reboot   system boot  6.6.87.2-microso Thu Aug 28 08:37   still running
+reboot   system boot  6.6.87.2-microso Mon Aug 25 09:30   still running
+reboot   system boot  6.6.87.2-microso Mon Aug 25 09:15   still running
+reboot   system boot  6.6.87.2-microso Fri Aug 22 16:24   still running
+reboot   system boot  6.6.87.2-microso Fri Aug 22 03:36   still running
+
+wtmp begins Fri Aug 22 03:36:23 2025
+
+4.  Display complete system information, the hostname, and how long the system has been running.
+
+anurag@Desktop:/mnt/c/Users/asus$ uname -a
+Linux Desktop 6.6.87.2-microsoft-standard-WSL2 #1 SMP PREEMPT_DYNAMIC Thu Jun  5 18:30:46 UTC 2025 x86_64 x86_64 x86_64 GNU/Linux
+anurag@Desktop:/mnt/c/Users/asus$ hostname
+Desktop
+anurag@Desktop:/mnt/c/Users/asus$ uptime
+ 08:17:18 up 3 min,  1 user,  load average: 0.02, 0.05, 0.02
+
+5. Create two groups: developers and qa. Verify both groups were successfully created and display the complete list of groups on the system.
+
+anurag@Desktop:/mnt/c/Users/asus$  sudo groupadd developers
+[sudo] password for anurag:
+groupadd: group 'developers' already exists
+anurag@Desktop:/mnt/c/Users/asus$ sudo groupadd qa
+anurag@Desktop:/mnt/c/Users/asus$ grep 'developers\|qa' /etc/group
+developers:x:1001:
+qa:x:1004:
+
+6. Create the following users and assign each to their respective group:
+
+Employee	Department
+aman	developers
+ritu	developers
+karan	qa
+
+
+anurag@Desktop:/mnt/c/Users/asus$ sudo useradd -m -G developers aman
+anurag@Desktop:/mnt/c/Users/asus$ sudo useradd -m -G developers ritu
+anurag@Desktop:/mnt/c/Users/asus$ sudo useradd -m -G qa karan
+useradd: user 'karan' already exists
+anurag@Desktop:/mnt/c/Users/asus$ id aman
+id ritu
+id karan
+uid=1004(aman) gid=1005(aman) groups=1005(aman),1001(developers)
+uid=1005(ritu) gid=1006(ritu) groups=1006(ritu),1001(developers)
+uid=1003(karan) gid=1002(hr) groups=1002(hr)
+anurag@Desktop:/mnt/c/Users/asus$ sudo usermod -aG qa karan
+anurag@Desktop:/mnt/c/Users/asus$ id karan
+uid=1003(karan) gid=1002(hr) groups=1002(hr),1004(qa)
+
+7. Employee ritu has resigned. Ensure she has no active sessions, delete her account along with her home directory, and verify she no longer exists on the system.
+
+anurag@Desktop:/mnt/c/Users/asus$ who | grep ritu
+anurag@Desktop:/mnt/c/Users/asus$ sudo userdel -r ritu
+userdel: ritu mail spool (/var/mail/ritu) not found
+anurag@Desktop:/mnt/c/Users/asus$ id ritu
+id: ‘ritu’: no such user
